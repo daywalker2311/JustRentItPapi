@@ -19,15 +19,6 @@ namespace JustRentItPapi.Entities
         public virtual DbSet<Rents> Rents { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=database-1.cuqoajagbfwh.us-east-1.rds.amazonaws.com,1433;database=project;User ID=admin;Password=adminadmin;ConnectRetryCount=0;");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cars>(entity =>
