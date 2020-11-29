@@ -1,7 +1,0 @@
-D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\CarRentInfoLibrary\bin\Debug\netcoreapp3.1\CarRentInfoLibrary.deps.json
-D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\CarRentInfoLibrary\bin\Debug\netcoreapp3.1\CarRentInfoLibrary.dll
-D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\CarRentInfoLibrary\obj\Debug\netcoreapp3.1\CarRentInfoLibrary.csprojAssemblyReference.cache
-D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\CarRentInfoLibrary\obj\Debug\netcoreapp3.1\CarRentInfoLibrary.AssemblyInfoInputs.cache
-D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\CarRentInfoLibrary\obj\Debug\netcoreapp3.1\CarRentInfoLibrary.AssemblyInfo.cs
-D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\CarRentInfoLibrary\bin\Debug\netcoreapp3.1\CarRentInfoLibrary.runtimeconfig.json
-D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\CarRentInfoLibrary\bin\Debug\netcoreapp3.1\CarRentInfoLibrary.runtimeconfig.dev.json

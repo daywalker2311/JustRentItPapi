@@ -19,6 +19,15 @@ namespace JustRentItPapi.Entities
         public virtual DbSet<Rents> Rents { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=database-1.cuqoajagbfwh.us-east-1.rds.amazonaws.com,1433;database=project;User ID=admin;Password=adminadmin;ConnectRetryCount=0;");
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cars>(entity =>
@@ -90,6 +99,11 @@ namespace JustRentItPapi.Entities
                     .HasMaxLength(1)
                     .IsUnicode(false);
 
+                entity.Property(e => e.FkCarid)
+                    .HasColumnName("fk_carid")
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Joiningdate)
                     .HasColumnName("joiningdate")
                     .HasColumnType("date");
@@ -105,6 +119,11 @@ namespace JustRentItPapi.Entities
                     .HasColumnName("username")
                     .HasMaxLength(1)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.FkCar)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.FkCarid)
+                    .HasConstraintName("FK__Users__fk_carid__3A81B327");
             });
 
             OnModelCreatingPartial(modelBuilder);
