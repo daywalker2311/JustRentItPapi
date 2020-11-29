@@ -3,14 +3,17 @@ using System.Collections.Generic;
 
 namespace JustRentItPapi.Entities
 {
-    public partial class Users
+    public partial class User
     {
+        public User()
+        {
+            Cars = new HashSet<Car>();
+        }
+
         public string Userid { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public DateTime? Joiningdate { get; set; }
-        public string FkCarid { get; set; }
 
-        public virtual Cars FkCar { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
     }
 }

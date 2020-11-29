@@ -15,13 +15,14 @@ namespace JustRentItPapi.Entities
         {
         }
 
-        public virtual DbSet<Cars> Cars { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Rents> Rents { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cars>(entity =>
+            modelBuilder.Entity<Car>(entity =>
             {
                 entity.HasKey(e => e.Carid)
                     .HasName("PK__Cars__1439FCAC94ED4417");
@@ -49,6 +50,11 @@ namespace JustRentItPapi.Entities
                     .HasMaxLength(1)
                     .IsUnicode(false);
 
+                entity.Property(e => e.FkUserid)
+                    .HasColumnName("fk_userid")
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Model)
                     .IsRequired()
                     .HasColumnName("model")
@@ -58,6 +64,11 @@ namespace JustRentItPapi.Entities
                 entity.Property(e => e.Yearmade)
                     .HasColumnName("yearmade")
                     .HasColumnType("date");
+
+                entity.HasOne(d => d.FkUser)
+                    .WithMany(p => p.Cars)
+                    .HasForeignKey(d => d.FkUserid)
+                    .HasConstraintName("FK__Cars__fk_userid__3D5E1FD2");
             });
 
             modelBuilder.Entity<Rents>(entity =>
@@ -80,24 +91,15 @@ namespace JustRentItPapi.Entities
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Users>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.Userid)
-                    .HasName("PK__Users__CBA1B2576F191C0F");
+                    .HasName("PK__Users__CBA1B2574E3B41B7");
 
                 entity.Property(e => e.Userid)
                     .HasColumnName("userid")
                     .HasMaxLength(1)
                     .IsUnicode(false);
-
-                entity.Property(e => e.FkCarid)
-                    .HasColumnName("fk_carid")
-                    .HasMaxLength(1)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Joiningdate)
-                    .HasColumnName("joiningdate")
-                    .HasColumnType("date");
 
                 entity.Property(e => e.Password)
                     .IsRequired()
@@ -110,11 +112,6 @@ namespace JustRentItPapi.Entities
                     .HasColumnName("username")
                     .HasMaxLength(1)
                     .IsUnicode(false);
-
-                entity.HasOne(d => d.FkCar)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.FkCarid)
-                    .HasConstraintName("FK__Users__fk_carid__3A81B327");
             });
 
             OnModelCreatingPartial(modelBuilder);

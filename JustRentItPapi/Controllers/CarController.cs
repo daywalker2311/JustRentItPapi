@@ -11,25 +11,25 @@ namespace JustRentItPapi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarsController : ControllerBase
+    public class CarController : ControllerBase
     {
         private readonly projectContext _context;
 
-        public CarsController(projectContext context)
+        public CarController(projectContext context)
         {
             _context = context;
         }
 
         // GET: api/Cars
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cars>>> GetCars()
+        public async Task<ActionResult<IEnumerable<Car>>> GetCars()
         {
             return await _context.Cars.ToListAsync();
         }
 
         // GET: api/Cars/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cars>> GetCars(string id)
+        public async Task<ActionResult<Car>> GetCars(string id)
         {
             var cars = await _context.Cars.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace JustRentItPapi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCars(string id, Cars cars)
+        public async Task<IActionResult> PutCars(string id, Car cars)
         {
             if (id != cars.Carid)
             {
@@ -77,7 +77,7 @@ namespace JustRentItPapi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Cars>> PostCars(Cars cars)
+        public async Task<ActionResult<Car>> PostCars(Car cars)
         {
             _context.Cars.Add(cars);
             try
@@ -101,7 +101,7 @@ namespace JustRentItPapi.Controllers
 
         // DELETE: api/Cars/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Cars>> DeleteCars(string id)
+        public async Task<ActionResult<Car>> DeleteCars(string id)
         {
             var cars = await _context.Cars.FindAsync(id);
             if (cars == null)

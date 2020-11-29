@@ -11,25 +11,25 @@ namespace JustRentItPapi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly projectContext _context;
 
-        public UsersController(projectContext context)
+        public UserController(projectContext context)
         {
             _context = context;
         }
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Users>> GetUsers(string id)
+        public async Task<ActionResult<User>> GetUsers(string id)
         {
             var users = await _context.Users.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace JustRentItPapi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsers(string id, Users users)
+        public async Task<IActionResult> PutUsers(string id, User users)
         {
             if (id != users.Userid)
             {
@@ -77,7 +77,7 @@ namespace JustRentItPapi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Users>> PostUsers(Users users)
+        public async Task<ActionResult<User>> PostUsers(User users)
         {
             _context.Users.Add(users);
             try
@@ -101,7 +101,7 @@ namespace JustRentItPapi.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Users>> DeleteUsers(string id)
+        public async Task<ActionResult<User>> DeleteUsers(string id)
         {
             var users = await _context.Users.FindAsync(id);
             if (users == null)
