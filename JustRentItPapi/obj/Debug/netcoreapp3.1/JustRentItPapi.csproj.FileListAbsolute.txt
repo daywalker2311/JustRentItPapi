@@ -155,5 +155,9 @@ D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\JustRentItPapi\bin\Debug\netco
 D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\JustRentItPapi\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\JustRentItPapi\bin\Debug\netcoreapp3.1\AutoMapper.dll
 D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\JustRentItPapi\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\JustRentItPapi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\JustRentItPapi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\JustRentItPapi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\JustRentItPapi\obj\Debug\netcoreapp3.1\JustRentItPapi.MvcApplicationPartsAssemblyInfo.cs
 D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\JustRentItPapi\obj\Debug\netcoreapp3.1\JustRentItPapi.MvcApplicationPartsAssemblyInfo.cache
+D:\Centennial\SEM3\aws\Assignments\JustRentItPapi\JustRentItPapi\bin\Debug\netcoreapp3.1\aws-beanstalk-tools-defaults.json

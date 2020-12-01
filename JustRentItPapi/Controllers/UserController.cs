@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using JustRentItPapi.Entities;
+using JustRentItPapi.Services;
+using AutoMapper;
+using JustRentItPapi.Models;
 
 namespace JustRentItPapi.Controllers
 {
@@ -13,32 +16,33 @@ namespace JustRentItPapi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly projectContext _context;
+        private ICarRentRepository _carRentRepository;
+        private readonly IMapper _mapper;
 
-        public UserController(projectContext context)
+        public UserController(ICarRentRepository carRentRepository,  IMapper mapper)
         {
-            _context = context;
+            _carRentRepository = carRentRepository;
+            _mapper = mapper;
         }
 
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            var userEntities =await _carRentRepository.GetUsers();
+            var results = _mapper.Map<IEnumerable<UserWithoutCarDto>>(userEntities);
+
+            return Ok(results);
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUsers(string id)
         {
-            var users = await _context.Users.FindAsync(id);
+            var userEntities =await _carRentRepository.GetUsers(id);
+            var results = _mapper.Map<IEnumerable<UserWithoutCarDto>>(userEntities);
 
-            if (users == null)
-            {
-                return NotFound();
-            }
-
-            return users;
+            return Ok(results);
         }
 
         // PUT: api/Users/5
@@ -52,23 +56,8 @@ namespace JustRentItPapi.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(users).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsersExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var result = await _carRentRepository.PutUsers(id, users);
 
             return NoContent();
         }
@@ -79,22 +68,7 @@ namespace JustRentItPapi.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUsers(User users)
         {
-            _context.Users.Add(users);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (UsersExists(users.Userid))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _carRentRepository.PostUsers(users);
 
             return CreatedAtAction("GetUsers", new { id = users.Userid }, users);
         }
@@ -103,21 +77,18 @@ namespace JustRentItPapi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUsers(string id)
         {
-            var users = await _context.Users.FindAsync(id);
+            var users = await _carRentRepository.DeleteUsers(id);
             if (users == null)
             {
                 return NotFound();
             }
-
-            _context.Users.Remove(users);
-            await _context.SaveChangesAsync();
 
             return users;
         }
 
         private bool UsersExists(string id)
         {
-            return _context.Users.Any(e => e.Userid == id);
+            return _carRentRepository.UsersExists(id);
         }
     }
 }

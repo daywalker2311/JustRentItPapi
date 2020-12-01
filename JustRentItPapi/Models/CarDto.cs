@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace JustRentItPapi.Entities
+namespace JustRentItPapi.Models
 {
-    public partial class Car
+    public partial class CarDto
     {
-        [Key]
         public string Carid { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
@@ -15,6 +13,6 @@ namespace JustRentItPapi.Entities
         public string Yearmade { get; set; }
         public string FkUserid { get; set; }
 
-        public virtual User FkUser { get; set; }
+        //public virtual User FkUser { get; set; }
     }
 }

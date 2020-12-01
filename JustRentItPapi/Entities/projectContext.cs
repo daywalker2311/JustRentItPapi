@@ -29,41 +29,41 @@ namespace JustRentItPapi.Entities
 
                 entity.Property(e => e.Carid)
                     .HasColumnName("carid")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Brand)
                     .IsRequired()
                     .HasColumnName("brand")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Color)
                     .IsRequired()
                     .HasColumnName("color")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Engine)
                     .IsRequired()
                     .HasColumnName("engine")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FkUserid)
                     .HasColumnName("fk_userid")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Model)
                     .IsRequired()
                     .HasColumnName("model")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Yearmade)
-                    .HasColumnName("yearmade")
-                    .HasColumnType("date");
+                    .HasMaxLength(50)
+                    .HasColumnName("yearmade");
 
                 entity.HasOne(d => d.FkUser)
                     .WithMany(p => p.Cars)
@@ -75,19 +75,19 @@ namespace JustRentItPapi.Entities
             {
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Confirmation)
                     .HasColumnName("confirmation")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Price).HasColumnName("price");
 
                 entity.Property(e => e.Rentperiod)
                     .HasColumnName("rentperiod")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
             });
 
@@ -98,19 +98,19 @@ namespace JustRentItPapi.Entities
 
                 entity.Property(e => e.Userid)
                     .HasColumnName("userid")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasColumnName("password")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasColumnName("username")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
             });
 

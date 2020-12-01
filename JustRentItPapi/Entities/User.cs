@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace JustRentItPapi.Entities
 {
@@ -10,6 +11,7 @@ namespace JustRentItPapi.Entities
             Cars = new HashSet<Car>();
         }
 
+        [Key]
         public string Userid { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }

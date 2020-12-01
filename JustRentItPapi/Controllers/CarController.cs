@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using JustRentItPapi.Entities;
+using AutoMapper;
+using JustRentItPapi.Services;
+using JustRentItPapi.Models;
 
 namespace JustRentItPapi.Controllers
 {
@@ -13,32 +16,34 @@ namespace JustRentItPapi.Controllers
     [ApiController]
     public class CarController : ControllerBase
     {
-        private readonly projectContext _context;
-
-        public CarController(projectContext context)
+        private ICarRentRepository _carRentRepository;
+        private readonly IMapper _mapper;
+        public CarController(ICarRentRepository carRentRepository, IMapper mapper)
         {
-            _context = context;
+            _carRentRepository = carRentRepository;
+            _mapper = mapper;
         }
 
         // GET: api/Cars
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Car>>> GetCars()
         {
-            return await _context.Cars.ToListAsync();
+            var carEntities = await _carRentRepository.GetCars();
+            var results = _mapper.Map<IEnumerable<CarDto>>(carEntities);
+
+            return Ok(results);
         }
 
         // GET: api/Cars/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Car>> GetCars(string id)
         {
-            var cars = await _context.Cars.FindAsync(id);
-
-            if (cars == null)
+            var result = await _carRentRepository.GetCars(id);
+            if (result == null)
             {
                 return NotFound();
             }
-
-            return cars;
+            return result;
         }
 
         // PUT: api/Cars/5
@@ -52,23 +57,7 @@ namespace JustRentItPapi.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(cars).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CarsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var result = await _carRentRepository.PutCars(id, cars);
 
             return NoContent();
         }
@@ -79,22 +68,7 @@ namespace JustRentItPapi.Controllers
         [HttpPost]
         public async Task<ActionResult<Car>> PostCars(Car cars)
         {
-            _context.Cars.Add(cars);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (CarsExists(cars.Carid))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _carRentRepository.PostCars(cars);
 
             return CreatedAtAction("GetCars", new { id = cars.Carid }, cars);
         }
@@ -103,21 +77,18 @@ namespace JustRentItPapi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Car>> DeleteCars(string id)
         {
-            var cars = await _context.Cars.FindAsync(id);
+            var cars = await _carRentRepository.DeleteCars(id);
             if (cars == null)
             {
                 return NotFound();
             }
-
-            _context.Cars.Remove(cars);
-            await _context.SaveChangesAsync();
 
             return cars;
         }
 
         private bool CarsExists(string id)
         {
-            return _context.Cars.Any(e => e.Carid == id);
+            return _carRentRepository.CarsExists(id);
         }
     }
 }

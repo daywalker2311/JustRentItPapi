@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using JustRentItPapi.Entities;
+using JustRentItPapi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,12 @@ namespace JustRentItPapi.Mappings
 {
     public class MappingProfile : Profile
     {
-
+        public MappingProfile()
+        {
+            CreateMap<User, UserDto>();
+            CreateMap<User, UserWithoutCarDto>();
+            CreateMap<Car, CarDto>();
+            CreateMap<Rents, RentsDto>();
+        }
     }
 }
